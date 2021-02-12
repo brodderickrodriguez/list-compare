@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+    background-color: rgb(100, 201, 195);
+}
+
+head h1, head p, footer h1, footer p {
+    color: #FFFFFF;
+}
+
+body h2, body p {
+    color: rgb(100, 201, 195);
+    text-align: center;
+    padding: 10px;
+}
+
+textarea {
+    border: 2px rgb(104, 109, 110) solid;
+    height: 250px;
+    width: 400px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.container {
+    border: 5px rgb(104, 109, 110) solid;
+    width: 80%;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+
+.centeringdiv {
+    display: flex;
+}
+
+.centeringdiv div {
+    flex: 1;
+}
+
+.inputdiv {
+    flex: 1;
+}
+
+.button1{
+    display:inline-block;
+    padding: 0.35em 1.2em;
+    border-radius: 5px;
+    border: 2px rgb(104, 109, 110) solid;
+    color: #FFFFFF;
+    background-color: rgb(100, 201, 195);
+    width: 120px;
+    height: 50px;
+    transition: all 0.2s;
+}
+
+.button1:hover{
+    color: rgb(100, 201, 195);
+    background-color: rgb(104, 109, 110);
+    border: 2px rgb(100, 201, 195) solid;
+}

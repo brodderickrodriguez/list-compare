@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+        <title>list-compare</title>
+        <h1>Gammon's list compare</h1>
+    </head>
+    <body>
+        <div id="input" class="container">
+            <h2>Input</h2>
+            <form method="post" action="/compare">
+                <div class="centeringdiv">
+                    <div>
+                        <p>LinkedIn Search Source Code</p>
+                        <textarea class="inputdiv" name="text_input_linkedin" placeholder="LinkedIn Search Source Code...">{{ data.input.text_input_linkedin }}</textarea>
+                    </div>
+                    <div>
+                        <p>Excel List</p>
+                        <textarea class="inputdiv" name="text_input_excel" placeholder="Excel List...">{{ data.input.text_input_excel }}</textarea>
+                    </div>
+                </div>
+                <br>
+                <input class="button1" type="submit" name="submit_button" value="Compare">
+                <br><br><br>
+            </form>
+        </div>
+        <br><br>
+        <div id="output" class="container">
+            <h2>Output</h2>
+            <div class="centeringdiv">
+                <div>
+                    <p>Only LinkedIn Search</p>
+                    <textarea name="text_output_linkedin_only" placeholder="Only LinkedIn Search">{{ data.output.text_output_linkedin_only }}</textarea>
+                </div>
+
+                <div>
+                    <p>Both</p>
+                    <textarea name="text_output_both" placeholder="Both">{{ data.output.text_output_both }}</textarea>
+                </div>
+
+                <div>
+                    <p>Only Excel</p>
+                    <textarea name="text_output_excel_only" placeholder="Only Excel">{{data.output.text_output_excel_only}}</textarea>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <h1>Gammon's list compare</h1>
+        <p>(c) brod's crummy code!</p>
+    </footer>
+</html>
