@@ -10,7 +10,7 @@ __pycache__/
 .idea
 .idea/*
 .idea/inspectionProfiles/Project_Default.xml
-
+*/.idea
 
 
 # Distribution / packaging
