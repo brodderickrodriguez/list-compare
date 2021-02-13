@@ -1,6 +1,7 @@
 body {
     text-align: center;
     background-color: rgb(100, 201, 195);
+    transition: all 0.1s;
 }
 
 h1, head h1, head h7, footer h1, footer h7 {
@@ -19,6 +20,7 @@ textarea {
     width: 400px;
     border-radius: 5px;
     padding: 5px;
+    max-re
 }
 
 a {
@@ -27,10 +29,12 @@ a {
 
 .container {
     border: 5px rgb(104, 109, 110) solid;
-    width: 80%;
+    min-width: 80%;
+    max-width: 96%;
     display: inline-block;
     border-radius: 5px;
     background-color: #FFFFFF;
+    padding: 0.35em 1.2em;
 }
 
 .centeringdiv {
@@ -62,3 +66,21 @@ a {
     background-color: rgb(104, 109, 110);
     border: 2px rgb(100, 201, 195) solid;
 }
+
+
+.instructionsdiv {
+    text-align: left;
+    display: inline-block;
+    border: 2px #FFFFFF solid;
+    border-radius: 5px;
+    padding: 0.35em 1.2em;
+}
+
+.instructionsdiv li {
+    color: #FFFFFF;
+}
+
+
+
+
+
