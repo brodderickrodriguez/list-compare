@@ -1,5 +1,6 @@
 import flask
 from bs4 import BeautifulSoup
+import logging
 
 
 _app = flask.Flask(__name__)
@@ -22,19 +23,22 @@ def update_data_dict(d):
 	for key, value in data_dict['input'].items():
 		try:
 			data_dict['input'][key] = d[key]
-		except KeyError:
-			pass
+		except KeyError as e:
+			logging.warning(f'could not update data dict for key={key}. excepted with e={e}')
 
 
 @_app.route('/', methods=['POST'])
 def compare():
-
-	# print(flask.request.form, file=sys.stderr)
-	# text_a = flask.request.form['text_list_a']
-	# text_b = flask.request.form['text_list_b']
+	logging.info(f'requested: {flask.request.form}')
 
 	update_data_dict(flask.request.form)
+	logging.info(f'returning: {data_dict}')
 	return flask.render_template('index.html', data=data_dict)
+
+
+@_app.route('/list-compare', methods=['POST'])
+def _():
+	return compare()
 
 
 @_app.route('/')
@@ -43,3 +47,4 @@ def main():
 
 
 application = _app
+logging.basicConfig(level=logging.DEBUG)
