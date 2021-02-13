@@ -1,6 +1,6 @@
+import logging
 import flask
 from bs4 import BeautifulSoup
-import logging
 
 
 _app = flask.Flask(__name__)
