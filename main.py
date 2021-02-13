@@ -27,7 +27,6 @@ def update_data_dict(d):
 			pass
 
 
-
 @app.route('/compare', methods=['POST'])
 def compare():
 
