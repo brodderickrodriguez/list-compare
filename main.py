@@ -28,8 +28,6 @@ def update_data_dict(d):
 
 
 
-
-
 @app.route('/compare', methods=['POST'])
 def compare():
 

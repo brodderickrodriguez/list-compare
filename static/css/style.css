@@ -3,7 +3,7 @@ body {
     background-color: rgb(100, 201, 195);
 }
 
-head h1, head p, footer h1, footer p {
+h1, head h1, head h7, footer h1, footer h7 {
     color: #FFFFFF;
 }
 
@@ -19,6 +19,10 @@ textarea {
     width: 400px;
     border-radius: 5px;
     padding: 5px;
+}
+
+a {
+    color: #FFFFFF;
 }
 
 .container {
