@@ -2,8 +2,7 @@ import flask
 from bs4 import BeautifulSoup
 
 
-
-app = flask.Flask(__name__)
+_app = flask.Flask(__name__)
 
 
 data_dict = {
@@ -27,7 +26,7 @@ def update_data_dict(d):
 			pass
 
 
-@app.route('/compare', methods=['POST'])
+@_app.route('/', methods=['POST'])
 def compare():
 
 	# print(flask.request.form, file=sys.stderr)
@@ -35,11 +34,12 @@ def compare():
 	# text_b = flask.request.form['text_list_b']
 
 	update_data_dict(flask.request.form)
-
-
 	return flask.render_template('index.html', data=data_dict)
 
 
-@app.route('/')
+@_app.route('/')
 def main():
 	return flask.render_template('index.html', data=data_dict)
+
+
+application = _app
