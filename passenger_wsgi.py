@@ -25,12 +25,17 @@ def print(*args, **kwargs):
 data_dict = {
 	'input': {
 		Namespace.linkedin_input: '',
-		Namespace.excel_input: ''
+		Namespace.excel_input: '',
 	},
 	'output': {
 		Namespace.linkedin_output: '',
 		Namespace.both_output: '',
-		Namespace.excel_output: ''
+		Namespace.excel_output: '',
+	},
+	'remote': {
+		'id': None,
+		'ip': None,
+		'usr': None,
 	}
 }
 
@@ -41,6 +46,12 @@ def update_data_dict(d):
 			data_dict['input'][key] = d[key]
 		except KeyError as e:
 			logging.warning(f'could not update data dict for key={key}. excepted with e={e}')
+
+
+def log_user_data(request):
+	logging.info(f'remote ip: {request.remote_addr}')
+	logging.info(f'remote usr: {request.remote_user}')
+	print('getting IP', request.remote_addr, request.remote_user)
 
 
 def parse_excel(text):
@@ -61,13 +72,34 @@ def parse_excel(text):
 
 
 def parse_ln_source(text):
-	return ''
+	soup = BeautifulSoup(text)
+	texts = []
+
+	for item in soup.find_all('span', dir='ltr'):
+		text = item.getText().replace('View', ' ')
+		first_word = text[:text.find(' ')]
+		r_idx = text.rfind(first_word)
+		text = text[:r_idx]
+		text = text.lower()
+		text = text.rstrip()
+		texts.append(text)
+
+	texts = set(texts)
+	return texts
 
 
-def log_user_data(request):
-	logging.info(f'remote ip: {request.remote_addr}')
-	logging.info(f'remote usr: {request.remote_user}')
-	print('getting IP', request.remote_addr, request.remote_user)
+def make_output_sets(ln_name_set, excel_name_set):
+	only_ln_names = ln_name_set - excel_name_set
+	both_ln_excel_names = ln_name_set.intersection(excel_name_set)
+	only_excel_names = excel_name_set - ln_name_set
+
+	output = {
+		Namespace.linkedin_output: '\n'.join(only_ln_names),
+		Namespace.both_output: '\n'.join(both_ln_excel_names),
+		Namespace.excel_output: '\n'.join(only_excel_names)
+	}
+
+	return output
 
 
 @_app.route('/', methods=['POST'])
@@ -79,8 +111,7 @@ def compare():
 	ln_name_set = parse_ln_source(flask.request.form[Namespace.linkedin_input])
 	excel_name_set = parse_excel(flask.request.form[Namespace.excel_input])
 
-	data_dict['output'][Namespace.linkedin_output] = ln_name_set
-	data_dict['output'][Namespace.excel_output] = str(excel_name_set)
+	data_dict['output'] = make_output_sets(ln_name_set, excel_name_set)
 
 	logging.info(f'returning: {data_dict}')
 	return flask.render_template('index.html', data=data_dict)
