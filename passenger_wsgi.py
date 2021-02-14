@@ -76,12 +76,11 @@ def parse_ln_source(text):
 	texts = []
 
 	for item in soup.find_all('span', dir='ltr'):
-		text = item.getText().replace('View', ' ')
-		first_word = text[:text.find(' ')]
-		r_idx = text.rfind(first_word)
-		text = text[:r_idx]
+		text = item.getText()
+		text = text[:text.rfind('View')]
 		text = text.lower()
 		text = text.rstrip()
+		text = text.replace('.', '')
 		texts.append(text)
 
 	texts = set(texts)
